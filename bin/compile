@@ -11,10 +11,10 @@ DOWNLOAD_URL="http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-stat
 
 echo "DOWNLOAD_URL = " $DOWNLOAD_URL | indent
 
-cd $BUILD_DIR
-mkdir -p $VENDOR_DIR/ffmpeg
-cd $VENDOR_DIR
-curl -L --silent $DOWNLOAD_URL | tar -xJf - -C $VENDOR_DIR/ffmpeg --strip-components=1
+export DOWNLOAD_DIR="$BUILD_DIR/$VENDOR_DIR/ffmpeg"
+mkdir -p $DOWNLOAD_DIR
+echo "$DOWNLOAD_DIR"
+curl -L --silent $DOWNLOAD_URL | tar -xJf - -C $DOWNLOAD_DIR --strip-components=1
 
 echo "exporting PATH and LIBRARY_PATH" | indent
 PROFILE_PATH="$BUILD_DIR/.profile.d/ffmpeg.sh"
